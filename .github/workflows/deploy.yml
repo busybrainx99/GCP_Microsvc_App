@@ -31,10 +31,10 @@ jobs:
         env:
           TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
           TF_VAR_name: ${{ secrets.GKE_NAME }}
-          TF_VAR_zone: ${{ secretes.GKE_ZONE }}
-          TF_VAR_region: ${{ secretes.GKE_REGION }}
-          TF_VAR_account_id: ${{ secretes.GKE_ACCOUNT_ID }}
-          TF_VAR_config_path: ${{ secretes.GKE_CONFIG_PATH }}
+          TF_VAR_zone: ${{ secrets.GKE_ZONE }}
+          TF_VAR_region: ${{ secrets.GKE_REGION }}
+          TF_VAR_account_id: ${{ secrets.GKE_ACCOUNT_ID }}
+          TF_VAR_config_path: ${{ secrets.GKE_CONFIG_PATH }}
      
       - name: Get GKE Credentials
         run: |
