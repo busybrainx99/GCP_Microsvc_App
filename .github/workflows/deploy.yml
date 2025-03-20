@@ -1,0 +1,43 @@
+name: Deploy GKE MicroSvc
+
+on:
+  #push:
+    #branches: [ "main" ]
+  #pull_request:
+    #branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Deploy Terraform infrastructure
+        run: |
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
+        working-directory: terraform_code
+        env:
+          TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
+          TF_VAR_name: ${{ secrets.GKE_NAME }}
+          TF_VAR_zone: ${{ secretes.GKE_ZONE }}
+          TF_VAR_region: ${{ secretes.GKE_REGION }}
+          TF_VAR_account_id: ${{ secretes.GKE_ACCOUNT_ID }}
+          TF_VAR_config_path: ${{ secretes.GKE_CONFIG_PATH }}
+     
+      - name: Get GKE Credentials
+        run: |
+          gcloud container clusters get-credentials ${{ secrets.GKE_NAME }} \
+          --zone ${{ secrets.GKE_ZONE }} \
+          --project ${{ secrets.GCP_PROJECT_ID }}
