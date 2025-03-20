@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: multi-microsvc-monitoring-ingress
+  namespace: monitoring
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dev
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - prom.goodnesseboh.engineer
+      - graf.goodnesseboh.engineer
+      - alert.goodnesseboh.engineer
+    secretName: letsencrypt-monitoring
+  rules:
+    - host: prom.goodnesseboh.engineer
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: prometheus-server 
+                port:
+                  number: 9090
+    - host: graf.goodnesseboh.engineer
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: grafana 
+                port:
+                  number: 80
+    - host: alert.goodnesseboh.engineer
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: prometheus-alertmanager 
+                port:
+                  number: 9093            
+        

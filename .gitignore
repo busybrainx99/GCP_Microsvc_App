@@ -1,0 +1,8 @@
+/terraform_code/.terraform
+/terraform_code/.terraform.lock.hcl
+/terraform_code/.terraform.tfstate.lock.info
+/terraform_code/central-phalanx-447210-u6-533722cfb981.json
+/terraform_code/terraform.tfstate
+/terraform_code/terraform.tfstate.backup
+/terraform_code/terraform.tfvars
+key.json
