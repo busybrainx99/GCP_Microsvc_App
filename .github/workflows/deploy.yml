@@ -58,7 +58,7 @@ jobs:
         run: |
           helm repo add external-secrets https://charts.external-secrets.io
           helm repo update external-secrets
-          helm install external-secrets external-secrets/external-secrets \
+          helm upgrade --install external-secrets external-secrets/external-secrets \
             --namespace external-secrets \
             --create-namespace
       
