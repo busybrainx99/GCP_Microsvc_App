@@ -8,12 +8,10 @@ spec:
   source:
     repoURL: https://github.com/busybrainx99/GCP_Microsvc_App.git
     targetRevision: main
-    path: values
+    path: prometheus-chart
     helm:
-      chart: prometheus
-      repo: https://prometheus-community.github.io/helm-charts
       valueFiles:
-        - prometheus-values.yml 
+        - values/prometheus-values.yml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
