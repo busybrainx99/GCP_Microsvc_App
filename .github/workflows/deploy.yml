@@ -58,9 +58,7 @@ jobs:
         run: |
           helm repo add external-secrets https://charts.external-secrets.io
           helm repo update external-secrets
-          helm upgrade --install external-secrets external-secrets/external-secrets \
-            --namespace external-secrets \
-            --create-namespace
+          helm upgrade --install external-secrets external-secrets/external-secrets --namespace external-secrets --create-namespace
       
       - name: Wait for External Secrets Operator
         run: |
@@ -74,7 +72,8 @@ jobs:
           echo "${{ secrets.GCP_SA_KEY }}" > key.json
           kubectl create secret generic gcp-secret-manager \
             --from-file=key.json=key.json \
-            -n external-secrets
+            -n external-secrets \
+            --dry-run=client -o yaml | kubectl apply -f -
           rm key.json
 
       - name: Apply ClusterSecretStore
