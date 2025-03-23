@@ -83,7 +83,7 @@ jobs:
         
       - name: Apply Additional Configs
         run: |
-          kubectl create namespace monitoring --dry-run=client -0 yaml | kubectl apply -f -
+          kubectl create namespace monitoring --dry-run=client -o yaml | kubectl apply -f -
           kubectl apply -f alertmanager-external-secret.yml
         
       - name: Install ArgoCD
