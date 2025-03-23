@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: 
+  name: microsvc
+  namespace: argocd
+spec:
+  project: GCP-Microsvc_App
+  source: 
+    repoURL: https://github.com/busybrainx99/GCP_Microsvc_App.git
+    targetRevision: main
+    path: microsvc-chart
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: multi-microsvc
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

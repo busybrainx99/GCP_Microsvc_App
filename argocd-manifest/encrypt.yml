@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: 
+  name: cluster-issuer
+  namespace: argocd
+spec:
+  project: GCP-Microsvc_App
+  source: 
+    repoURL: https://github.com/busybrainx99/GCP_Microsvc_App.git
+    targetRevision: main
+    path: encrypt-chart
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
