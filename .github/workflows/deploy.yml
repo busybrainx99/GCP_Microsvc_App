@@ -18,6 +18,18 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
+      
+      - name: Setup gcloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          install_components: 'gke-gcloud-auth-plugin'
+          
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+
+      - name: Install helm
+        uses: azure/setup-helm@v4.2.0
           
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
@@ -34,24 +46,7 @@ jobs:
           TF_VAR_zone: ${{ secrets.GKE_ZONE }}
           TF_VAR_region: ${{ secrets.GKE_REGION }}
           TF_VAR_account_id: ${{ secrets.GKE_ACCOUNT_ID }}
-          TF_VAR_config_path: ${{ secrets.GKE_CONFIG_PATH }}
-
-      - name: Install gcloud SDK
-        run: |
-          curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/google-cloud-sdk.gpg
-          echo "deb [signed-by=/usr/share/keyrings/google-cloud-sdk.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-          sudo apt-get update && sudo apt-get install -y google-cloud-sdk
-
-      - name: Install gke-gcloud-auth-plugin
-        run: |
-          sudo apt-get install -y google-cloud-sdk-gke-gcloud-auth-plugin
-          gke-gcloud-auth-plugin --version
-
-      - name: Install kubectl
-        uses: azure/setup-kubectl@v3
-
-      - name: Install helm
-        uses: azure/setup-helm@v4.2.0
+          TF_VAR_config_path: ${{ secrets.GKE_CONFIG_PATH }}   
      
       - name: Get GKE Credentials
         run: |
