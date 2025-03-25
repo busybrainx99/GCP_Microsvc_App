@@ -69,7 +69,7 @@ jobs:
 
       - name: Create GCP secrets
         run: |
-          echo "${{ secrets.GCP_SA_KEY }}" > key.json
+          echo "${{ secrets.GCP_SAA }}" > key.json
           kubectl create secret generic gcp-secret-manager \
             --from-file=key.json=key.json \
             -n external-secrets \
