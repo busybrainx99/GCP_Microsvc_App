@@ -1,4 +1,4 @@
-name: Deploy GKE MicroSvc
+name: Deploy GKE Microsvc
 
 on:
   #push:
