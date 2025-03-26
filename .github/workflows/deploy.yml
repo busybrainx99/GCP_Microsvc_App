@@ -67,14 +67,18 @@ jobs:
       - name: Install envsubst
         run: sudo apt-get update && sudo apt-get install -y gettext-base
 
-      - name: Create GCP secrets
+      - name: Create GCP Service Account Key and Secret
         run: |
-          echo "${{ secrets.GCP_SAA }}" > key.json
+          gcloud iam service-accounts keys create key.json \
+            --iam-account=gke-secret-access@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com \
+            --project=${{ secrets.GCP_PROJECT_ID }}
+          cat key.json
+          jq . key.json || { echo "Invalid JSON in key.json"; exit 1; }
           kubectl create secret generic gcp-secret-manager \
             --from-file=key.json=key.json \
             -n external-secrets \
             --dry-run=client -o yaml | kubectl apply -f -
-          rm key.json
+          rm -f key.json
 
       - name: Apply ClusterSecretStore
         run: |
