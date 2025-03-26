@@ -4,7 +4,7 @@ metadata:
   name: grafana
   namespace: argocd
 spec:
-  project: GCP-Microsvc_App
+  project: gcp-microsvc-app
   source:
     repoURL: https://grafana.github.io/helm-charts
     chart: grafana

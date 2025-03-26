@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: GCP-Microsvc_App
+  name: gcp-microsvc-app
   namespace: argocd
 spec:
   description: Project for GCP Microservices

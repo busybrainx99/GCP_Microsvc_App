@@ -4,7 +4,7 @@ metadata:
   name: ingress
   namespace: argocd
 spec:
-  project: GCP-Microsvc_App
+  project: gcp-microsvc-app
   source: 
     repoURL: https://github.com/busybrainx99/GCP_Microsvc_App.git
     targetRevision: main
