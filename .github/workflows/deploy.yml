@@ -72,8 +72,6 @@ jobs:
           gcloud iam service-accounts keys create key.json \
             --iam-account=gke-secret-access@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com \
             --project=${{ secrets.GCP_PROJECT_ID }}
-          cat key.json
-          jq . key.json || { echo "Invalid JSON in key.json"; exit 1; }
           kubectl create secret generic gcp-secret-manager \
             --from-file=key.json=key.json \
             -n external-secrets \
@@ -95,6 +93,11 @@ jobs:
           kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
           kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
           kubectl wait --for=condition=available deployment -l app.kubernetes.io/name=argocd-server -n argocd --timeout=300s
+          sleep 10
+
+      - name: Create ArgoCD Project
+        run: |
+          kubectl apply -f argocd-manifest/gcp-microsvc-project.yml
 
       - name: Apply Argo applications
         run: |
