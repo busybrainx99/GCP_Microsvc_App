@@ -281,5 +281,3 @@ If you’d like to connect or collaborate, feel free to:
 - 🔗 X: [Goodness](https://https://x.com/busybrainx99)
 
 ---
-
-**This project showcases advanced DevOps practices, Cloud Infrastructure automation, and CI/CD pipelines, making it a perfect addition to your portfolio for Cloud/DevOps roles!**
