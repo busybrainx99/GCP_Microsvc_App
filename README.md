@@ -6,21 +6,30 @@ This project automates the deployment of a **microservices application** on a **
 
 ### **Key Technologies and Services Used:**
 
-**Terraform:** Infrastructure as Code (IaC) to provision GCP resources including:
-- GKE cluster and node pools.
-- VPC network and subnet configurations.
-- GCP Secret Manager for managing sensitive credentials.
-- GCS Bucket with versioning enabled to store Terraform state securely.
-**ArgoCD:** Continuous Delivery (CD) to manage and sync Kubernetes applications from GitHub.
-**GitHub Actions CI/CD Pipelines:**
-- `deploy.yml` → Deploys the full microservices stack and infrastructure.
-- `cleanup.yml` → Destroys the GKE cluster and cleans up all associated resources.
-**External Secrets Operator:** Syncs Kubernetes secrets from GCP Secret Manager.
-**Prometheus and Grafana:** Monitors application performance and sends real-time alerts.
-**Alertmanager for Notifications:**
-- Sends **alerts to Slack and Email** for critical incidents.
-- Tracks **Pod Down/Up** and **Node Down/Up** alerts.
-**Cert-Manager with Let's Encrypt:** Manages TLS certificates to secure ingress traffic.
+1. **Terraform:** Infrastructure as Code (IaC) to provision GCP resources including:
+   - GKE cluster and node pools.
+   - VPC network and subnet configurations.
+   - GCP Secret Access service account
+
+2. GCP Secret Manager for managing sensitive credentials.
+3. GCS Bucket with versioning enabled to store Terraform state securely.
+
+4. **ArgoCD:** Continuous Delivery (CD) to manage and sync Kubernetes applications from GitHub.
+
+5. **GitHub Actions CI/CD Pipelines:**
+   - `deploy.yml` → Deploys the full microservices stack and infrastructure.
+   - `cleanup.yml` → Destroys the GKE cluster and cleans up all associated resources.
+
+6. **External Secrets Operator:** Syncs Kubernetes secrets from GCP Secret Manager.
+
+7. **Prometheus and Grafana:** Monitors application performance and sends real-time alerts.
+
+8. **Alertmanager for Notifications:**
+   - Sends **alerts to Slack and Email** for critical incidents.
+   - Tracks **Pod Down/Up** and **Node Down/Up** alerts.
+
+9. **Cert-Manager with Let's Encrypt:** Manages TLS certificates to secure ingress traffic.
+10. **Nginx Ingress Controller:** To route external traffic to services within a Kubernetes cluster based on domain names, paths, or other routing rules.
 
 ---
 
@@ -30,8 +39,8 @@ This project automates the deployment of a **microservices application** on a **
 .
 ├── .github/
 │   └── workflows/
-│       ├── deploy.yml         # CI/CD pipeline for deployment
-│       └── cleanup.yml        # CI/CD pipeline for cleanup
+│       ├── deploy.yml         
+│       └── cleanup.yml       
 ├── argocd-manifest/
 │   ├── cert-manager.yml
 │   ├── encrypt.yml
