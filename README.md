@@ -6,21 +6,21 @@ This project automates the deployment of a **microservices application** on a **
 
 ### **Key Technologies and Services Used:**
 
-- **Terraform:** Infrastructure as Code (IaC) to provision GCP resources including:
+**Terraform:** Infrastructure as Code (IaC) to provision GCP resources including:
 - GKE cluster and node pools.
 - VPC network and subnet configurations.
 - GCP Secret Manager for managing sensitive credentials.
 - GCS Bucket with versioning enabled to store Terraform state securely.
-- **ArgoCD:** Continuous Delivery (CD) to manage and sync Kubernetes applications from GitHub.
-- **GitHub Actions CI/CD Pipelines:**
+**ArgoCD:** Continuous Delivery (CD) to manage and sync Kubernetes applications from GitHub.
+**GitHub Actions CI/CD Pipelines:**
 - `deploy.yml` → Deploys the full microservices stack and infrastructure.
 - `cleanup.yml` → Destroys the GKE cluster and cleans up all associated resources.
-- **External Secrets Operator:** Syncs Kubernetes secrets from GCP Secret Manager.
-- **Prometheus and Grafana:** Monitors application performance and sends real-time alerts.
-- **Alertmanager for Notifications:**
+**External Secrets Operator:** Syncs Kubernetes secrets from GCP Secret Manager.
+**Prometheus and Grafana:** Monitors application performance and sends real-time alerts.
+**Alertmanager for Notifications:**
 - Sends **alerts to Slack and Email** for critical incidents.
 - Tracks **Pod Down/Up** and **Node Down/Up** alerts.
-- **Cert-Manager with Let's Encrypt:** Manages TLS certificates to secure ingress traffic.
+**Cert-Manager with Let's Encrypt:** Manages TLS certificates to secure ingress traffic.
 
 ---
 
