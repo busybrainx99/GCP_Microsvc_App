@@ -268,7 +268,8 @@ This project demonstrates:
 If you’d like to connect or collaborate, feel free to:
 
 - 📧 Email: [ebohgoodness.t@gmail.com](mailto:ebohgoodness.t@gmail.com)
-- 🔗 LinkedIn: [www.linkedin.com/in/goodness-eboh](https://www.linkedin.com/in/goodness-eboh)
+- 🔗 LinkedIn: [Goodness E. Eboh](https://www.linkedin.com/in/goodness-eboh)
+- 🔗 X: [Goodness](https://https://x.com/busybrainx99)
 
 ---
 
