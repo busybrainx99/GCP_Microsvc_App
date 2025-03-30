@@ -57,37 +57,37 @@ alertmanager:
     templates:
       - "/etc/alertmanager/*.tmpl"
 
-server:
-  enabled: true
-
-serverFiles:
-  alerting_rules.yml:
-    groups:
-      - name: pod-service-alerts
-        rules:
-          - alert: PodDown
-            expr: kube_pod_status_ready{condition="false"} > 0
-            for: 1m
-            labels:
-              severity: critical
-            annotations:
-              summary: "Pod {{ $labels.pod }} is not ready"
-              description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} is down for more than 1 minute."
-          - alert: ServiceUnavailable
-            expr: kube_service_spec_type{type="ClusterIP"} == 0
-            for: 1m
-            labels:
-              severity: critical
-            annotations:
-              summary: "Service {{ $labels.service }} is unavailable"
-              description: "Service {{ $labels.service }} in namespace {{ $labels.namespace }} is down for more than 1 minute."
-      - name: node-alerts
-        rules:
-          - alert: NodeDown
-            expr: up{job="node-exporter"} == 0
-            for: 1m
-            labels:
-              severity: critical
-            annotations:
-              summary: "Node {{ $labels.instance }} is down"
-              description: "Node exporter is reporting that the node is down."
+prometheus:
+  server:
+    enabled: true
+  serverFiles:
+    alerting_rules.yml:
+      groups:
+        - name: pod-service-alerts
+          rules:
+            - alert: PodDown
+              expr: kube_pod_status_ready{condition="false"} > 0
+              for: 1m
+              labels:
+                severity: critical
+              annotations:
+                summary: "Pod {{ $labels.pod }} is not ready"
+                description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} is down for more than 1 minute."
+            - alert: ServiceUnavailable
+              expr: kube_service_spec_type{type="ClusterIP"} == 0
+              for: 1m
+              labels:
+                severity: critical
+              annotations:
+                summary: "Service {{ $labels.service }} is unavailable"
+                description: "Service {{ $labels.service }} in namespace {{ $labels.namespace }} is down for more than 1 minute."
+        - name: node-alerts
+          rules:
+            - alert: NodeDown
+              expr: up{job="node-exporter"} == 0
+              for: 1m
+              labels:
+                severity: critical
+              annotations:
+                summary: "Node {{ $labels.instance }} is down"
+                description: "Node exporter is reporting that the node is down."
