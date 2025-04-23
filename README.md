@@ -31,6 +31,8 @@ This project automates the deployment of a **microservices application** on a **
 9. **Cert-Manager with Let's Encrypt:** Manages TLS certificates to secure ingress traffic.
 10. **Nginx Ingress Controller:** To route external traffic to services within a Kubernetes cluster based on domain names, paths, or other routing rules.
 
+Follow this link to read my article on this project: https://medium.com/@ebohgoodness.e/what-it-takes-to-securely-deploy-a-microservice-application-on-kubernetes-using-gcp-terraform-afe794348bea
+
 ---
 
 ## Folder Structure
